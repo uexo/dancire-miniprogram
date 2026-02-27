@@ -1,0 +1,89 @@
+<!-- pages/vip/vip.wxml -->
+<view class="vip-container">
+  <!-- 头部 -->
+  <view class="vip-header">
+    <view class="vip-icon">👑</view>
+    <view class="vip-title">开通VIP会员</view>
+    <view class="vip-desc">解锁全部词库，让学习更高效</view>
+    
+    <view wx:if="{{isVip}}" class="vip-status">
+      VIP有效期至 {{vipExpireDate}}
+    </view>
+  </view>
+
+  <!-- 会员套餐 -->
+  <view class="products-section">
+    <view class="section-title">选择会员套餐</view>
+    
+    <view 
+      class="product-item {{selectedProduct === item.id ? 'selected' : ''}}"
+      wx:for="{{products}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onSelectProduct"
+    >
+      <view class="product-tag" wx:if="{{item.tag}}" style="{{item.hot ? 'background:#FFD700;color:#333;' : ''}}">
+        {{item.tag}}
+      </view>
+      
+      <view class="product-header">
+        <view class="product-name">{{item.name}}</view>
+        <view class="product-duration">{{item.duration}}</view>
+      </view>
+      
+      <view class="product-price-section">
+        <text class="price-symbol">¥</text>
+        <text class="price-value">{{item.price}}</text>
+        <text class="price-original">¥{{item.originalPrice}}</text>
+      </view>
+      
+      <view class="product-features">
+        <view class="feature-tag" wx:for="{{item.features}}" wx:key="*this">
+          {{item}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员权益 -->
+  <view class="benefits-section">
+    <view class="section-title">会员专享权益</view>
+    
+    <view class="benefits-list">
+      <view class="benefit-item">
+        <view class="benefit-icon">📚</view>
+        <view class="benefit-text">全部词库</view>
+      </view>
+      
+      <view class="benefit-item">
+        <view class="benefit-icon">∞</view>
+        <view class="benefit-text">无限学习</view>
+      </view>
+      
+      <view class="benefit-item">
+        <view class="benefit-icon">🚫</view>
+        <view class="benefit-text">去广告</view>
+      </view>
+      
+      <view class="benefit-item">
+        <view class="benefit-icon">📊</view>
+        <view class="benefit-text">专属报告</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部支付栏 -->
+  <view class="pay-bar">
+    <view class="pay-info">
+      <view class="pay-price">
+        <text>¥</text>
+        {{products.find(p=>p.id===selectedProduct).price}}
+        <text class="pay-original">
+          ¥{{products.find(p=>p.id===selectedProduct).originalPrice}}
+        </text>
+      </view>
+    </view>
+    
+    <button class="pay-btn" bindtap="onSubscribe">立即开通</button>
+  </view>
+</view>

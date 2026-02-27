@@ -1,0 +1,65 @@
+<!-- pages/checkin/checkin.wxml -->
+<view class="checkin-container">
+  <!-- 顶部统计 -->
+  <view class="stats-card">
+    <view class="continuous-days">{{continuousDays}}</view>
+    <view class="days-label">连续打卡天数</view>
+    <view class="total-days">累计打卡 {{totalDays}} 天</view>
+  </view>
+
+  <!-- 打卡按钮 -->
+  <view class="checkin-btn-section">
+    <view 
+      class="checkin-btn {{todayCheckin ? 'disabled' : ''}}"
+      bindtap="onCheckinToday"
+    >
+      <text class="checkin-icon">{{todayCheckin ? '✓' : '✏️'}}</text>
+      <text class="checkin-text">{{todayCheckin ? '今日已打卡' : '立即打卡'}}</text>
+      <text wx:if="{{todayCheckin}}" class="checked-text">明天再来~</text>
+    </view>
+  </view>
+
+  <!-- 日历 -->
+  <view class="calendar-section">
+    <view class="calendar-header">{{currentYear}}年{{currentMonth}}月</view>
+    
+    <view class="weekdays">
+      <view class="weekday" wx:for="['日','一','二','三','四','五','六']" wx:key="*this">
+        {{item}}
+      </view>
+    </view>
+    
+    <view class="days-grid">
+      <view 
+        class="day-cell {{item.type}} {{item.checked ? 'checked' : ''}}"
+        wx:for="{{calendarDays}}"
+        wx:key="index"
+      >
+        {{item.day}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 连续打卡奖励 -->
+  <view class="rewards-section">
+    <view class="section-title">连续打卡奖励</view>
+    
+    <view class="rewards-list">
+      <view 
+        class="reward-item {{continuousDays >= item.day ? 'active' : ''}} {{item.claimed ? 'claimed' : ''}}"
+        wx:for="{{rewards}}"
+        wx:key="day"
+        data-day="{{item.day}}"
+        bindtap="onClaimReward"
+      >
+        <view class="reward-day">{{item.day}}天</view>
+        <view class="reward-coin">+{{item.coin}}</view>
+        <view 
+          class="reward-btn {{continuousDays < item.day || item.claimed ? 'disabled' : ''}}"
+        >
+          {{item.claimed ? '已领取' : (continuousDays >= item.day ? '领取' : '未达成')}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

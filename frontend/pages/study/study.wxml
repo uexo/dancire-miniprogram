@@ -1,0 +1,61 @@
+<!-- pages/study/study.wxml -->
+<view class="study-container">
+  <!-- 进度条 -->
+  <view class="progress-bar">
+    <view class="progress-fill" style="width: {{(progress.current / progress.total) * 100}}%"></view>
+  </view>
+  <view class="progress-text">{{progress.current + 1}} / {{progress.total}}</view>
+
+  <!-- 单词卡片 -->
+  <view class="word-card">
+    <view class="word-title">{{currentWord.word}}</view>
+    <view class="phonetic">{{currentWord.phonetic || '/.../'}}</view>
+    <view class="audio-btn" bindtap="onPlayAudio">
+      <text class="audio-icon">🔊</text>
+    </view>
+
+    <!-- 答案区域 -->
+    <view class="answer-section" wx:if="{{showAnswer}}">
+      <view class="meaning">{{currentWord.meaning}}</view>
+      <view class="example" wx:if="{{currentWord.example}}">
+        {{currentWord.example}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 选项列表（选择题模式） -->
+  <view class="options-list" wx:if="{{currentWord.options}}">
+    <view 
+      class="option-item {{selectedOption === index ? (isCorrect ? 'correct' : 'wrong') : ''}}"
+      wx:for="{{currentWord.options}}"
+      wx:key="index"
+      data-index="{{index}}"
+      bindtap="onSelectOption"
+    >
+      {{item}}
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons" wx:if="{{!currentWord.options || showAnswer}}">
+    <view class="action-btn btn-secondary" bindtap="onMarkHard">不认识</view>
+    <view class="action-btn btn-primary" bindtap="onShowAnswer" wx:if="{{!showAnswer}}">显示答案</view>
+    <view class="action-btn btn-primary" bindtap="nextWord" wx:if="{{showAnswer}}">下一个</view>
+  </view>
+
+  <!-- 底部统计 -->
+  <view class="stats-bar">
+    <view class="stat-item">
+      <view class="stat-value">{{studyStats.correct}}</view>
+      <view class="stat-label">正确</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-value wrong">{{studyStats.wrong}}</view>
+      <view class="stat-label">错误</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-value">{{progress.total - progress.current - 1}}</view>
+      <view class="stat-label">剩余</view>
+    </view>
+  </view>
+</view>

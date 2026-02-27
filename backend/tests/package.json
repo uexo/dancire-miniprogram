@@ -1,0 +1,22 @@
+{
+  "name": "wordheat-tests",
+  "version": "1.0.0",
+  "description": "单词热 - 单元测试",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:algorithm": "jest algorithm.test.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/app.js"
+    ]
+  }
+}

@@ -1,0 +1,240 @@
+<!-- 家长报告页 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 报告内容 -->
+  <block wx:else>
+    <!-- 头部 -->
+    <view class="report-header">
+      <text class="report-title">学习报告</text>
+      <text class="report-date">{{calendar.year}}年{{calendar.month}}月</text>
+      <view class="share-btn" bindtap="onExportReport">
+        <text class="share-icon">📤</text>
+        <text>分享</text>
+      </view>
+    </view>
+
+    <!-- Tab切换 -->
+    <view class="tab-bar">
+      <view 
+        class="tab-item {{activeTab === 'stats' ? 'active' : ''}}"
+        data-tab="stats"
+        bindtap="onSwitchTab"
+      >
+        <text>数据概览</text>
+      </view>
+      <view 
+        class="tab-item {{activeTab === 'calendar' ? 'active' : ''}}"
+        data-tab="calendar"
+        bindtap="onSwitchTab"
+      >
+        <text>打卡日历</text>
+      </view>
+      <view 
+        class="tab-item {{activeTab === 'wrongwords' ? 'active' : ''}}"
+        data-tab="wrongwords"
+        bindtap="onSwitchTab"
+      >
+        <text>错题本</text>
+        <text wx:if="{{wrongWordsTotal > 0}}" class="badge">{{wrongWordsTotal}}</text>
+      </view>
+    </view>
+
+    <!-- 数据概览 Tab -->
+    <view wx:if="{{activeTab === 'stats'}}" class="tab-content">
+      <!-- 核心数据卡片 -->
+      <view class="stats-grid">
+        <view class="stat-card">
+          <text class="stat-value">{{stats.totalWords}}</text>
+          <text class="stat-label">已学单词</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-value">{{stats.masteredWords}}</text>
+          <text class="stat-label">已掌握</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-value">{{stats.accuracy}}%</text>
+          <text class="stat-label">平均正确率</text>
+        </view>
+        <view class="stat-card">
+          <text class="stat-value">{{Math.floor(stats.studyMinutes / 60)}}h{{stats.studyMinutes % 60}}m</text>
+          <text class="stat-label">学习时长</text>
+        </view>
+      </view>
+
+      <!-- 打卡统计 -->
+      <view class="checkin-stats">
+        <view class="checkin-item">
+          <text class="checkin-value">{{stats.continuousDays}}</text>
+          <text class="checkin-label">连续打卡</text>
+        </view>
+        <view class="checkin-divider"></view>
+        <view class="checkin-item">
+          <text class="checkin-value">{{stats.totalDays}}</text>
+          <text class="checkin-label">累计天数</text>
+        </view>
+      </view>
+
+      <!-- 艾宾浩斯记忆曲线 -->
+      <view class="section memory-curve">
+        <view class="section-header">
+          <text class="section-title">📈 记忆曲线</text>
+          <text class="section-subtitle">基于艾宾浩斯遗忘曲线</text>
+        </view>
+        
+        <!-- 曲线图表 -->
+        <view class="curve-chart">
+          <canvas 
+            type="2d" 
+            id="memoryCurveCanvas" 
+            class="curve-canvas"
+            style="width: 100%; height: 200px;"
+          ></canvas>
+          
+          <!-- 图例 -->
+          <view class="chart-legend">
+            <view class="legend-item">
+              <view class="legend-line theoretical"></view>
+              <text>理论遗忘曲线</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-line actual"></view>
+              <text>实际记忆保持</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 曲线说明 -->
+        <view class="curve-info">
+          <text class="info-text">
+            根据艾宾浩斯遗忘曲线，记忆会随时间衰减。通过及时复习，可以有效保持记忆。建议在遗忘临界点进行复习：1天、2天、4天、7天、15天后。
+          </text>
+        </view>
+      </view>
+
+      <!-- 学习建议 -->
+      <view class="section suggestions" wx:if="{{suggestions.length > 0}}">
+        <view class="section-header">
+          <text class="section-title">💡 学习建议</text>
+        </view>
+        <view class="suggestion-list">
+          <view 
+            wx:for="{{suggestions}}" 
+            wx:key="index"
+            class="suggestion-item {{item.type}}"
+          >
+            <text class="suggestion-icon">{{item.icon}}</text>
+            <view class="suggestion-content">
+              <text class="suggestion-title">{{item.title}}</text>
+              <text class="suggestion-text">{{item.content}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 打卡日历 Tab -->
+    <view wx:if="{{activeTab === 'calendar'}}" class="tab-content">
+      <!-- 月份切换 -->
+      <view class="calendar-header">
+        <view class="month-nav" bindtap="onChangeMonth" data-delta="-1">
+          <text class="nav-arrow">‹</text>
+        </view>
+        <text class="month-title">{{calendar.year}}年{{calendar.month}}月</text>
+        <view class="month-nav" bindtap="onChangeMonth" data-delta="1">
+          <text class="nav-arrow">›</text>
+        </view>
+      </view>
+
+      <!-- 星期标题 -->
+      <view class="week-header">
+        <text wx:for="['日', '一', '二', '三', '四', '五', '六']" wx:key="index" class="week-day">{{item}}</text>
+      </view>
+
+      <!-- 日历网格 -->
+      <view class="calendar-grid">
+        <view 
+          wx:for="{{calendar.days}}" 
+          wx:key="index"
+          class="calendar-cell {{item.type}} {{item.status}} {{item.isToday ? 'today' : ''}}"
+        >
+          <text wx:if="{{item.type === 'day'}}" class="day-number">{{item.day}}</text>
+          <view wx:if="{{item.status !== 'none' && item.type === 'day'}}" class="study-indicator"></view>
+        </view>
+      </view>
+
+      <!-- 图例说明 -->
+      <view class="calendar-legend">
+        <view class="legend-row">
+          <view class="legend-dot excellent"></view>
+          <text>优秀 (≥90%)</text>
+        </view>
+        <view class="legend-row">
+          <view class="legend-dot good"></view>
+          <text>良好 (70-89%)</text>
+        </view>
+        <view class="legend-row">
+          <view class="legend-dot normal"></view>
+          <text>一般 (<70%)</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 错题本 Tab -->
+    <view wx:if="{{activeTab === 'wrongwords'}}" class="tab-content">
+      <!-- 错题统计 -->
+      <view class="wrongwords-header">
+        <text class="wrongwords-count">共 {{wrongWordsTotal}} 个错题</text>
+        <button 
+          wx:if="{{wrongWordsTotal > 0}}"
+          class="review-btn"
+          bindtap="onReviewWrongWords"
+        >开始复习</button>
+      </view>
+
+      <!-- 错题列表 -->
+      <view class="wrongwords-list">
+        <view 
+          wx:for="{{wrongWords}}" 
+          wx:key="id"
+          class="wrongword-item"
+          bindtap="onViewWordDetail"
+          data-id="{{item.id}}"
+        >
+          <view class="word-info">
+            <text class="word-text">{{item.word}}</text>
+            <text class="word-phonetic">/{{item.phonetic}}/</text>
+            <text class="word-meaning">{{item.meaning}}</text>
+          </view>
+          <view class="word-stats">
+            <text class="wrong-count">错 {{item.wrong_count}} 次</text>
+            <text class="last-wrong">{{item.last_wrong_at}}</text>
+          </view>
+        </view>
+
+        <!-- 加载更多 -->
+        <view 
+          wx:if="{{wrongWords.length < wrongWordsTotal}}"
+          class="load-more"
+          bindtap="onLoadMoreWrongWords"
+        >
+          <text>加载更多</text>
+        </view>
+      </view>
+
+      <!-- 空状态 -->
+      <view wx:if="{{wrongWords.length === 0}}" class="empty-state">
+        <text class="empty-icon">🎉</text>
+        <text class="empty-text">太棒了！没有错题</text>
+        <text class="empty-subtext">继续保持，好好学习！</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 隐藏canvas用于生成分享图 -->
+  <canvas type="2d" id="reportCanvas" style="position: fixed; left: -9999px; width: 750px; height: 1200px;"></canvas>
+</view>

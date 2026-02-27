@@ -1,0 +1,147 @@
+/* pages/index/index.wxss */
+.container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20rpx;
+}
+
+/* 用户信息卡片 */
+.user-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #f0f0f0;
+  margin-right: 30rpx;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.grade {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.vip-badge {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #fff;
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+/* 统计卡片 */
+.stats-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4CAF50;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.stat-label {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 今日任务卡片 */
+.task-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.task-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.task-count {
+  font-size: 72rpx;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 10rpx;
+}
+
+.task-desc {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.btn-start {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 30rpx 80rpx;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* 功能网格 */
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10rpx;
+}
+
+.feature-item {
+  width: calc(50% - 20rpx);
+  margin: 10rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  text-align: center;
+}
+
+.feature-icon {
+  font-size: 60rpx;
+  margin-bottom: 20rpx;
+}
+
+.feature-name {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.feature-desc {
+  font-size: 24rpx;
+  color: #999;
+}

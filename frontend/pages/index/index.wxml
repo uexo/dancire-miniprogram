@@ -1,0 +1,70 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="user-card">
+    <image class="avatar" src="{{userInfo.avatar_url || '/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+    <view class="user-info">
+      <view class="nickname">{{userInfo.nickname || '同学'}}</view>
+      <view class="grade">{{userInfo.grade ? userInfo.grade + '年级' : '请设置年级'}}</view>
+    </view>
+    <view wx:if="{{isVip}}" class="vip-badge">VIP</view>
+    <view wx:else class="vip-badge" style="background:#ccc;" bindtap="onOpenVip">开通VIP</view>
+  </view>
+
+  <!-- 学习统计 -->
+  <view class="stats-card">
+    <view class="stat-item">
+      <text class="stat-number">{{totalWords}}</text>
+      <text class="stat-label">总词数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{masteredWords}}</text>
+      <text class="stat-label">已掌握</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{continuousDays}}</text>
+      <text class="stat-label">连续打卡</text>
+    </view>
+  </view>
+
+  <!-- 今日任务 -->
+  <view class="task-card">
+    <view class="task-title">今日学习任务</view>
+    <view class="task-count">{{todayTasks}}</view>
+    <view class="task-desc">个单词待复习</view>
+    
+    <view 
+      class="btn-start" 
+      bindtap="{{todayTasks > 0 ? 'onContinueStudy' : 'onStartStudy'}}"
+    >
+      {{todayTasks > 0 ? '继续学习' : '开始学习'}}
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="feature-grid">
+    <view class="feature-item" bindtap="onViewWords">
+      <view class="feature-icon">📚</view>
+      <view class="feature-name">词库</view>
+      <view class="feature-desc">课本同步</view>
+    </view>
+
+    <view class="feature-item" bindtap="onViewWrongWords">
+      <view class="feature-icon">❌</view>
+      <view class="feature-name">错题本</view>
+      <view class="feature-desc">重点复习</view>
+    </view>
+
+    <view class="feature-item" bindtap="onOpenVip">
+      <view class="feature-icon">👑</view>
+      <view class="feature-name">VIP会员</view>
+      <view class="feature-desc">解锁全部</view>
+    </view>
+
+    <view class="feature-item" bindtap="onViewReport">
+      <view class="feature-icon">📊</view>
+      <view class="feature-name">学习报告</view>
+      <view class="feature-desc">家长可见</view>
+    </view>
+  </view>
+</view>

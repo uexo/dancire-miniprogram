@@ -1,0 +1,547 @@
+{
+  "version": "人教版PEP小学英语",
+  "description": "人教版PEP小学英语单词表（三年级至六年级）",
+  "total_words": 800,
+  "grades": [
+    {
+      "grade": 3,
+      "units": [
+        {
+          "unit": 1,
+          "title": "Hello",
+          "words": [
+            {
+              "word": "hello",
+              "phonetic": "/həˈləʊ/",
+              "meaning": "你好",
+              "pos": "int.",
+              "example": "Hello, I'm Amy.",
+              "example_translation": "你好，我是艾米。",
+              "difficulty": 1,
+              "tags": ["greeting", "starter"]
+            },
+            {
+              "word": "hi",
+              "phonetic": "/haɪ/",
+              "meaning": "嗨，你好",
+              "pos": "int.",
+              "example": "Hi, what's your name?",
+              "example_translation": "嗨，你叫什么名字？",
+              "difficulty": 1,
+              "tags": ["greeting", "starter"]
+            },
+            {
+              "word": "I",
+              "phonetic": "/aɪ/",
+              "meaning": "我",
+              "pos": "pron.",
+              "example": "I am a student.",
+              "example_translation": "我是一名学生。",
+              "difficulty": 1,
+              "tags": ["pronoun", "starter"]
+            },
+            {
+              "word": "am",
+              "phonetic": "/æm/",
+              "meaning": "是（用于第一人称I）",
+              "pos": "v.",
+              "example": "I am happy.",
+              "example_translation": "我很高兴。",
+              "difficulty": 1,
+              "tags": ["verb", "be", "starter"]
+            },
+            {
+              "word": "I am",
+              "phonetic": "/aɪ æm/",
+              "meaning": "我是",
+              "pos": "phrase",
+              "example": "I am Sarah.",
+              "example_translation": "我是萨拉。",
+              "difficulty": 1,
+              "tags": ["phrase", "starter"]
+            },
+            {
+              "word": "goodbye",
+              "phonetic": "/ˌɡʊdˈbaɪ/",
+              "meaning": "再见",
+              "pos": "int.",
+              "example": "Goodbye, Miss White.",
+              "example_translation": "再见，怀特老师。",
+              "difficulty": 1,
+              "tags": ["farewell", "starter"]
+            },
+            {
+              "word": "bye",
+              "phonetic": "/baɪ/",
+              "meaning": "再见",
+              "pos": "int.",
+              "example": "Bye, see you tomorrow.",
+              "example_translation": "再见，明天见。",
+              "difficulty": 1,
+              "tags": ["farewell", "starter"]
+            },
+            {
+              "word": "name",
+              "phonetic": "/neɪm/",
+              "meaning": "名字",
+              "pos": "n.",
+              "example": "My name is John.",
+              "example_translation": "我的名字是约翰。",
+              "difficulty": 1,
+              "tags": ["noun", "starter"]
+            },
+            {
+              "word": "what",
+              "phonetic": "/wɒt/",
+              "meaning": "什么",
+              "pos": "pron.",
+              "example": "What is your name?",
+              "example_translation": "你叫什么名字？",
+              "difficulty": 1,
+              "tags": ["question", "starter"]
+            },
+            {
+              "word": "is",
+              "phonetic": "/ɪz/",
+              "meaning": "是（用于第三人称单数）",
+              "pos": "v.",
+              "example": "She is a teacher.",
+              "example_translation": "她是一位老师。",
+              "difficulty": 1,
+              "tags": ["verb", "be", "starter"]
+            }
+          ]
+        },
+        {
+          "unit": 2,
+          "title": "Colours",
+          "words": [
+            {
+              "word": "red",
+              "phonetic": "/red/",
+              "meaning": "红色；红色的",
+              "pos": "n./adj.",
+              "example": "I like red apples.",
+              "example_translation": "我喜欢红苹果。",
+              "difficulty": 1,
+              "tags": ["color", "adjective", "starter"]
+            },
+            {
+              "word": "green",
+              "phonetic": "/ɡriːn/",
+              "meaning": "绿色；绿色的",
+              "pos": "n./adj.",
+              "example": "The grass is green.",
+              "example_translation": "草是绿色的。",
+              "difficulty": 1,
+              "tags": ["color", "adjective", "starter"]
+            },
+            {
+              "word": "yellow",
+              "phonetic": "/ˈjeləʊ/",
+              "meaning": "黄色；黄色的",
+              "pos": "n./adj.",
+              "example": "The banana is yellow.",
+              "example_translation": "香蕉是黄色的。",
+              "difficulty": 1,
+              "tags": ["color", "adjective", "starter"]
+            },
+            {
+              "word": "blue",
+              "phonetic": "/bluː/",
+              "meaning": "蓝色；蓝色的",
+              "pos": "n./adj.",
+              "example": "The sky is blue.",
+              "example_translation": "天空是蓝色的。",
+              "difficulty": 1,
+              "tags": ["color", "adjective", "starter"]
+            },
+            {
+              "word": "black",
+              "phonetic": "/blæk/",
+              "meaning": "黑色；黑色的",
+              "pos": "n./adj.",
+              "example": "The cat is black.",
+              "example_translation": "这只猫是黑色的。",
+              "difficulty": 1,
+              "tags": ["color", "adjective", "starter"]
+            },
+            {
+              "word": "white",
+              "phonetic": "/waɪt/",
+              "meaning": "白色；白色的",
+              "pos": "n./adj.",
+              "example": "The snow is white.",
+              "example_translation": "雪是白色的。",
+              "difficulty": 1,
+              "tags": ["color", "adjective", "starter"]
+            },
+            {
+              "word": "orange",
+              "phonetic": "/ˈɒrɪndʒ/",
+              "meaning": "橙色；橙色的；橙子",
+              "pos": "n./adj.",
+              "example": "I like orange juice.",
+              "example_translation": "我喜欢橙汁。",
+              "difficulty": 1,
+              "tags": ["color", "fruit", "starter"]
+            },
+            {
+              "word": "brown",
+              "phonetic": "/braʊn/",
+              "meaning": "棕色；棕色的",
+              "pos": "n./adj.",
+              "example": "The bear is brown.",
+              "example_translation": "这只熊是棕色的。",
+              "difficulty": 1,
+              "tags": ["color", "adjective", "starter"]
+            },
+            {
+              "word": "colour",
+              "phonetic": "/ˈkʌlə(r)/",
+              "meaning": "颜色",
+              "pos": "n.",
+              "example": "What colour is it?",
+              "example_translation": "它是什么颜色的？",
+              "difficulty": 1,
+              "tags": ["color", "starter"]
+            }
+          ]
+        },
+        {
+          "unit": 3,
+          "title": "Look at me",
+          "words": [
+            {
+              "word": "face",
+              "phonetic": "/feɪs/",
+              "meaning": "脸",
+              "pos": "n.",
+              "example": "Wash your face.",
+              "example_translation": "洗洗脸。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "ear",
+              "phonetic": "/ɪə(r)/",
+              "meaning": "耳朵",
+              "pos": "n.",
+              "example": "Touch your ear.",
+              "example_translation": "摸摸你的耳朵。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "eye",
+              "phonetic": "/aɪ/",
+              "meaning": "眼睛",
+              "pos": "n.",
+              "example": "Close your eyes.",
+              "example_translation": "闭上眼睛。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "nose",
+              "phonetic": "/nəʊz/",
+              "meaning": "鼻子",
+              "pos": "n.",
+              "example": "This is my nose.",
+              "example_translation": "这是我的鼻子。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "mouth",
+              "phonetic": "/maʊθ/",
+              "meaning": "嘴",
+              "pos": "n.",
+              "example": "Open your mouth.",
+              "example_translation": "张开嘴。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "arm",
+              "phonetic": "/ɑːm/",
+              "meaning": "胳膊",
+              "pos": "n.",
+              "example": "Raise your arm.",
+              "example_translation": "举起你的胳膊。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "hand",
+              "phonetic": "/hænd/",
+              "meaning": "手",
+              "pos": "n.",
+              "example": "Clap your hands.",
+              "example_translation": "拍拍手。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "head",
+              "phonetic": "/hed/",
+              "meaning": "头",
+              "pos": "n.",
+              "example": "Shake your head.",
+              "example_translation": "摇摇头。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "body",
+              "phonetic": "/ˈbɒdi/",
+              "meaning": "身体",
+              "pos": "n.",
+              "example": "This is my body.",
+              "example_translation": "这是我的身体。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "leg",
+              "phonetic": "/leɡ/",
+              "meaning": "腿",
+              "pos": "n.",
+              "example": "Lift your leg.",
+              "example_translation": "抬起你的腿。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            },
+            {
+              "word": "foot",
+              "phonetic": "/fʊt/",
+              "meaning": "脚",
+              "pos": "n.",
+              "example": "Stamp your foot.",
+              "example_translation": "跺跺脚。",
+              "difficulty": 1,
+              "tags": ["body", "noun", "starter"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "units": [
+        {
+          "unit": 1,
+          "title": "My classroom",
+          "words": [
+            {
+              "word": "classroom",
+              "phonetic": "/ˈklɑːsruːm/",
+              "meaning": "教室",
+              "pos": "n.",
+              "example": "This is my classroom.",
+              "example_translation": "这是我的教室。",
+              "difficulty": 2,
+              "tags": ["school", "place", "grade4"]
+            },
+            {
+              "word": "window",
+              "phonetic": "/ˈwɪndəʊ/",
+              "meaning": "窗户",
+              "pos": "n.",
+              "example": "Open the window, please.",
+              "example_translation": "请打开窗户。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "blackboard",
+              "phonetic": "/ˈblækbɔːd/",
+              "meaning": "黑板",
+              "pos": "n.",
+              "example": "Look at the blackboard.",
+              "example_translation": "看黑板。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "light",
+              "phonetic": "/laɪt/",
+              "meaning": "电灯；光",
+              "pos": "n.",
+              "example": "Turn on the light.",
+              "example_translation": "打开灯。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "picture",
+              "phonetic": "/ˈpɪktʃə(r)/",
+              "meaning": "图画",
+              "pos": "n.",
+              "example": "There is a picture on the wall.",
+              "example_translation": "墙上有一幅画。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "door",
+              "phonetic": "/dɔː(r)/",
+              "meaning": "门",
+              "pos": "n.",
+              "example": "Close the door, please.",
+              "example_translation": "请关门。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "floor",
+              "phonetic": "/flɔː(r)/",
+              "meaning": "地板；地面",
+              "pos": "n.",
+              "example": "The floor is clean.",
+              "example_translation": "地板很干净。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "computer",
+              "phonetic": "/kəmˈpjuːtə(r)/",
+              "meaning": "计算机",
+              "pos": "n.",
+              "example": "We have a computer in our classroom.",
+              "example_translation": "我们教室里有一台电脑。",
+              "difficulty": 3,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "teacher's desk",
+              "phonetic": "/ˈtiːtʃəz desk/",
+              "meaning": "讲台",
+              "pos": "n.",
+              "example": "The book is on the teacher's desk.",
+              "example_translation": "书在讲台上。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "wall",
+              "phonetic": "/wɔːl/",
+              "meaning": "墙壁",
+              "pos": "n.",
+              "example": "The map is on the wall.",
+              "example_translation": "地图在墙上。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            }
+          ]
+        },
+        {
+          "unit": 2,
+          "title": "My schoolbag",
+          "words": [
+            {
+              "word": "schoolbag",
+              "phonetic": "/ˈskuːlbæɡ/",
+              "meaning": "书包",
+              "pos": "n.",
+              "example": "My schoolbag is heavy.",
+              "example_translation": "我的书包很重。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "maths book",
+              "phonetic": "/mæθs bʊk/",
+              "meaning": "数学书",
+              "pos": "n.",
+              "example": "Put your maths book in your desk.",
+              "example_translation": "把你的数学书放进桌子里。",
+              "difficulty": 2,
+              "tags": ["school", "book", "grade4"]
+            },
+            {
+              "word": "English book",
+              "phonetic": "/ˈɪŋɡlɪʃ bʊk/",
+              "meaning": "英语书",
+              "pos": "n.",
+              "example": "I have an English book.",
+              "example_translation": "我有一本英语书。",
+              "difficulty": 2,
+              "tags": ["school", "book", "grade4"]
+            },
+            {
+              "word": "Chinese book",
+              "phonetic": "/ˌtʃaɪˈniːz bʊk/",
+              "meaning": "语文书",
+              "pos": "n.",
+              "example": "Open your Chinese book.",
+              "example_translation": "打开你的语文书。",
+              "difficulty": 2,
+              "tags": ["school", "book", "grade4"]
+            },
+            {
+              "word": "storybook",
+              "phonetic": "/ˈstɔːribʊk/",
+              "meaning": "故事书",
+              "pos": "n.",
+              "example": "I like reading storybooks.",
+              "example_translation": "我喜欢读故事书。",
+              "difficulty": 2,
+              "tags": ["book", "grade4"]
+            },
+            {
+              "word": "candy",
+              "phonetic": "/ˈkændi/",
+              "meaning": "糖果",
+              "pos": "n.",
+              "example": "I have some candy in my bag.",
+              "example_translation": "我包里有一些糖果。",
+              "difficulty": 2,
+              "tags": ["food", "noun", "grade4"]
+            },
+            {
+              "word": "notebook",
+              "phonetic": "/ˈnəʊtbʊk/",
+              "meaning": "笔记本",
+              "pos": "n.",
+              "example": "Write it in your notebook.",
+              "example_translation": "把它写在你的笔记本上。",
+              "difficulty": 2,
+              "tags": ["school", "noun", "grade4"]
+            },
+            {
+              "word": "toy",
+              "phonetic": "/tɔɪ/",
+              "meaning": "玩具",
+              "pos": "n.",
+              "example": "This is my favourite toy.",
+              "example_translation": "这是我最喜欢的玩具。",
+              "difficulty": 2,
+              "tags": ["noun", "grade4"]
+            },
+            {
+              "word": "key",
+              "phonetic": "/kiː/",
+              "meaning": "钥匙",
+              "pos": "n.",
+              "example": "Where is my key?",
+              "example_translation": "我的钥匙在哪里？",
+              "difficulty": 2,
+              "tags": ["noun", "grade4"]
+            },
+            {
+              "word": "wow",
+              "phonetic": "/waʊ/",
+              "meaning": "哇；呀",
+              "pos": "int.",
+              "example": "Wow, it's so big!",
+              "example_translation": "哇，它真大！",
+              "difficulty": 1,
+              "tags": ["exclamation", "grade4"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

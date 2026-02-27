@@ -1,0 +1,147 @@
+<!-- 登录页 -->
+<view class="container">
+  <!-- 顶部装饰 -->
+  <view class="header-bg">
+    <view class="logo-section">
+      <image class="logo" src="/assets/images/logo.png" mode="aspectFit"></image>
+      <text class="app-name">单词热</text>
+      <text class="app-slogan">同步课标，轻松背单词</text>
+    </view>
+  </view>
+
+  <!-- 登录卡片 -->
+  <view class="login-card">
+    <!-- 登录方式切换 -->
+    <view class="login-tabs">
+      <view 
+        class="tab {{loginType === 'wx' ? 'active' : ''}}"
+        data-type="wx"
+        bindtap="onSwitchLoginType"
+      >
+        <text>微信登录</text>
+      </view>
+      <view 
+        class="tab {{loginType === 'phone' ? 'active' : ''}}"
+        data-type="phone"
+        bindtap="onSwitchLoginType"
+      >
+        <text>手机号登录</text>
+      </view>
+    </view>
+
+    <!-- 微信登录 -->
+    <view wx:if="{{loginType === 'wx'}}" class="login-content">
+      <view class="wx-login-section">
+        <view class="wx-icon">
+          <text>💬</text>
+        </view>
+        
+        <text class="wx-title">微信一键登录</text>
+        <text class="wx-desc">使用微信授权，快速登录</text>
+        
+        <!-- 微信登录按钮 -->
+        <button 
+          class="wx-login-btn"
+          open-type="getPhoneNumber"
+          bind:getphonenumber="onGetPhoneNumber"
+          loading="{{loading}}"
+        >
+          <text class="btn-icon">💬</text>
+          <text>微信手机号快捷登录</text>
+        </button>
+        
+        <!-- 普通微信登录 -->
+        <button 
+          class="wx-login-btn secondary"
+          bindtap="onWxLogin"
+          loading="{{loading}}"
+        >
+          <text>微信授权登录</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 手机号登录 -->
+    <view wx:if="{{loginType === 'phone'}}" class="login-content">
+      <view class="phone-login-section">
+        <!-- 手机号输入 -->
+        <view class="input-group">
+          <text class="input-label">手机号</text>
+          <view class="input-wrap">
+            <text class="input-prefix">+86</text>
+            <input 
+              class="input"
+              type="number"
+              maxlength="11"
+              placeholder="请输入手机号"
+              value="{{phoneNumber}}"
+              bindinput="onPhoneInput"
+            />
+          </view>
+        </view>
+
+        <!-- 验证码输入 -->
+        <view class="input-group">
+          <text class="input-label">验证码</text>
+          <view class="input-wrap code-wrap">
+            <input 
+              class="input code-input"
+              type="number"
+              maxlength="6"
+              placeholder="请输入验证码"
+              value="{{verifyCode}}"
+              bindinput="onCodeInput"
+            />
+            <button 
+              class="send-code-btn {{counting ? 'disabled' : ''}}"
+              bindtap="onSendCode"
+              disabled="{{counting}}"
+            >
+              <text wx:if="{{!counting}}">获取验证码</text>
+              <text wx:else>{{countDown}}s</text>
+            </button>
+          </view>
+        </view>
+
+        <!-- 登录按钮 -->
+        <button 
+          class="login-btn"
+          bindtap="onPhoneLogin"
+          loading="{{loading}}"
+        >
+          登录
+        </button>
+      </view>
+    </view>
+
+    <!-- 错误提示 -->
+    <view wx:if="{{errorMsg}}" class="error-tip">
+      <text>{{errorMsg}}</text>
+    </view>
+
+    <!-- 用户协议 -->
+    <view class="protocol-section">
+      <view class="protocol-check" bindtap="onToggleProtocol">
+        <view class="checkbox {{agreeProtocol ? 'checked' : ''}}">
+          <text wx:if="{{agreeProtocol}}">✓</text>
+        </view>
+        <view class="protocol-text">
+          <text>我已阅读并同意</text>
+          <text class="protocol-link" catchtap="onViewProtocol">《用户协议》</text>
+          <text>和</text>
+          <text class="protocol-link" catchtap="onViewPrivacy">《隐私政策》</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 游客模式 -->
+    <view class="guest-section">
+      <text class="guest-link" bindtap="onGuestLogin">游客模式</text>
+    </view>
+  </view>
+
+  <!-- 底部版权 -->
+  <view class="footer">
+    <text>© 2024 单词热 WordHeat</text>
+  </view>
+</view>
