@@ -1,76 +1,46 @@
-// backend/src/middleware/error.js
-// 错误处理中间件
+// backend/src/middleware/error.js - 错误处理中间件
+class AppError extends Error {
+  constructor(message, statusCode, code) {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+    this.isOperational = true;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
 
-/**
- * 全局错误处理中间件
- */
 const errorHandler = (err, req, res, next) => {
-  console.error('Error:', err);
-
-  // 默认错误信息
-  let statusCode = err.statusCode || 500;
-  let message = err.message || '服务器内部错误';
-
-  // MySQL错误处理
-  if (err.code) {
-    switch (err.code) {
-      case 'ER_DUP_ENTRY':
-        statusCode = 409;
-        message = '数据已存在';
-        break;
-      case 'ER_NO_REFERENCED_ROW':
-      case 'ER_NO_REFERENCED_ROW_2':
-        statusCode = 400;
-        message = '引用的数据不存在';
-        break;
-      case 'ER_BAD_NULL_ERROR':
-        statusCode = 400;
-        message = '必填字段不能为空';
-        break;
-      case 'ER_DATA_TOO_LONG':
-        statusCode = 400;
-        message = '数据长度超出限制';
-        break;
-      case 'ECONNREFUSED':
-        statusCode = 503;
-        message = '数据库连接失败';
-        break;
-    }
+  err.statusCode = err.statusCode || 500;
+  err.message = err.message || '服务器错误';
+  
+  // 开发环境返回详细错误
+  if (process.env.NODE_ENV === 'development') {
+    return res.status(err.statusCode).json({
+      success: false,
+      message: err.message,
+      code: err.code || 'UNKNOWN_ERROR',
+      stack: err.stack,
+      error: err
+    });
   }
-
-  // JWT错误
-  if (err.name === 'JsonWebTokenError') {
-    statusCode = 401;
-    message = '无效的token';
-  } else if (err.name === 'TokenExpiredError') {
-    statusCode = 401;
-    message = 'token已过期';
+  
+  // 生产环境只返回安全信息
+  if (err.isOperational) {
+    return res.status(err.statusCode).json({
+      success: false,
+      message: err.message,
+      code: err.code
+    });
   }
-
-  // 验证错误
-  if (err.name === 'ValidationError') {
-    statusCode = 400;
-    message = err.message;
-  }
-
-  res.status(statusCode).json({
+  
+  // 非预期错误，记录日志但不暴露细节
+  console.error('ERROR 💥', err);
+  
+  return res.status(500).json({
     success: false,
-    message: message,
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+    message: '服务器内部错误',
+    code: 'INTERNAL_ERROR'
   });
 };
 
-/**
- * 404处理中间件
- */
-const notFoundHandler = (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: '接口不存在'
-  });
-};
-
-module.exports = {
-  errorHandler,
-  notFoundHandler
-};
+module.exports = { AppError, errorHandler };
