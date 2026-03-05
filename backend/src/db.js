@@ -17,12 +17,7 @@ const pool = mysql.createPool({
   keepAliveInitialDelay: 10000,
   
   // 超时设置
-  connectTimeout: 10000,      // 连接超时10秒
-  acquireTimeout: 60000,      // 获取连接超时60秒
-  timeout: 60000,             // 查询超时60秒
-  
-  // 连接验证
-  testOnBorrow: true
+  connectTimeout: 10000       // 连接超时10秒
 });
 
 // 监听连接池错误
