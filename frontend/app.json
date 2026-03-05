@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/study/study",
     "pages/checkin/checkin",
+    "pages/profile/profile",
     "pages/vip/vip",
     "pages/parent-report/parent-report",
     "pages/login/login"
