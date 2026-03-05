@@ -179,7 +179,7 @@
         </view>
         <view class="legend-row">
           <view class="legend-dot normal"></view>
-          <text>一般 (<70%)</text>
+          <text>一般 (小于70%)</text>
         </view>
       </view>
     </view>
