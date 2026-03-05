@@ -38,18 +38,27 @@ Page({
           hot: p.type === 'quarter'
         }));
         
+        const selectedProduct = products[1]?.id || products[0]?.id;
+        const selectedProductData = products.find(p => p.id === selectedProduct);
+        
         this.setData({
           products,
-          selectedProduct: products[1]?.id || products[0]?.id, // 默认选中季度
+          selectedProduct,
+          selectedProductPrice: selectedProductData?.price || 0,
+          selectedProductOriginalPrice: selectedProductData?.originalPrice || 0,
           loading: false
         });
       }
     } catch (err) {
       console.error('加载产品价格失败:', err);
       // 使用默认数据
+      const defaultProducts = this.getDefaultProducts();
+      const defaultProduct = defaultProducts.find(p => p.id === 'quarter');
       this.setData({
-        products: this.getDefaultProducts(),
+        products: defaultProducts,
         selectedProduct: 'quarter',
+        selectedProductPrice: defaultProduct?.price || 0,
+        selectedProductOriginalPrice: defaultProduct?.originalPrice || 0,
         loading: false
       });
     }
@@ -155,7 +164,12 @@ Page({
   // 选择产品
   onSelectProduct(e) {
     const id = e.currentTarget.dataset.id;
-    this.setData({ selectedProduct: id });
+    const product = this.data.products.find(p => p.id === id);
+    this.setData({ 
+      selectedProduct: id,
+      selectedProductPrice: product?.price || 0,
+      selectedProductOriginalPrice: product?.originalPrice || 0
+    });
   },
 
   // 立即开通

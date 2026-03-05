@@ -77,9 +77,9 @@
     <view class="pay-info">
       <view class="pay-price">
         <text>¥</text>
-        {{products.find(p=>p.id===selectedProduct).price}}
+        {{selectedProductPrice}}
         <text class="pay-original">
-          ¥{{products.find(p=>p.id===selectedProduct).originalPrice}}
+          ¥{{selectedProductOriginalPrice}}
         </text>
       </view>
     </view>
