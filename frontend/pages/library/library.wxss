@@ -1,0 +1,68 @@
+/* pages/library/library.wxss */
+.container {
+  padding: 16px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.wordbank-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wordbank-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.wordbank-info {
+  flex: 1;
+}
+
+.wordbank-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.wordbank-meta {
+  font-size: 13px;
+  color: #6B7280;
+}
+
+.wordbank-progress {
+  margin-right: 12px;
+}
+
+.progress-ring {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #6D28D9;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6D28D9;
+}
+
+.vip-tag {
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+  color: #fff;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}

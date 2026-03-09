@@ -1,0 +1,325 @@
+/** pages/learning/learning.wxss **/
+/* 学习模式选择中心样式 - 基于 PRD Design Tokens */
+
+.learning-container {
+  min-height: 100vh;
+  background-color: var(--gray-100);
+  padding-bottom: 32px;
+}
+
+/* 顶部导航 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: var(--white);
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.header-action {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: var(--gray-200);
+}
+
+.header-action .icon {
+  font-size: 20px;
+}
+
+/* 词库信息卡片 */
+.wordbank-card {
+  margin: 16px;
+}
+
+.wordbank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.wordbank-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.wordbank-stats {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.wordbank-arrow {
+  font-size: 20px;
+  color: var(--gray-400);
+}
+
+.progress-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: var(--gray-300);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* 继续学习 CTA */
+.continue-section {
+  margin: 0 16px 16px;
+}
+
+.continue-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+  border-radius: 12px;
+  color: var(--white);
+}
+
+.continue-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.continue-info {
+  flex: 1;
+}
+
+.continue-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.continue-desc {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.continue-btn {
+  padding: 8px 16px;
+  background-color: var(--white);
+  color: var(--primary);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 学习模式选择 */
+.modes-section {
+  margin: 0 16px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.mode-card {
+  position: relative;
+  padding: 16px;
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.mode-card:active {
+  transform: scale(0.98);
+}
+
+.mode-vip {
+  background: linear-gradient(135deg, #FFF9E6, #FFF5D6);
+}
+
+.vip-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 8px;
+  background-color: var(--warning);
+  color: var(--white);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.new-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 2px 8px;
+  background-color: var(--error);
+  color: var(--white);
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.mode-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.mode-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.mode-desc {
+  font-size: 12px;
+  color: var(--gray-600);
+  margin-bottom: 12px;
+}
+
+.mode-mastery {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mastery-bar {
+  flex: 1;
+  height: 4px;
+  background-color: var(--gray-300);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mastery-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.mastery-text {
+  font-size: 12px;
+  color: var(--gray-600);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* 学习设置面板 */
+.settings-panel {
+  margin: 16px;
+  background-color: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.settings-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.settings-toggle {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.settings-content {
+  padding: 16px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-label {
+  font-size: 14px;
+  color: var(--gray-700);
+}
+
+.setting-control {
+  min-width: 120px;
+}
+
+.picker-value {
+  font-size: 14px;
+  color: var(--primary);
+  text-align: right;
+}
+
+/* 滑块样式 */
+slider {
+  margin: 0;
+}
+
+/* 安全区 */
+.safe-area-bottom {
+  height: constant(safe-area-inset-bottom);
+  height: env(safe-area-inset-bottom);
+}

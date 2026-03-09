@@ -1,0 +1,25 @@
+<!-- pages/library/library.wxml -->
+<view class="container">
+  <view class="section-title">选择词库</view>
+  
+  <view class="wordbank-list">
+    <view 
+      class="wordbank-item"
+      wx:for="{{wordbanks}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onSelectWordbank"
+    >
+      <view class="wordbank-info">
+        <view class="wordbank-name">{{item.name}}</text>
+        <view class="wordbank-meta">{{item.grade}}年级 · {{item.count}}词</view>
+      </view>
+      
+      <view class="wordbank-progress" wx:if="{{item.progress > 0}}">
+        <view class="progress-ring">{{item.progress}}%</view>
+      </view>
+      
+      <view class="vip-tag" wx:if="{{item.isVip}}">VIP</view>
+    </view>
+  </view>
+</view>

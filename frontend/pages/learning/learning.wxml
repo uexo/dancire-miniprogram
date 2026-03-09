@@ -1,0 +1,136 @@
+<!-- pages/learning/learning.wxml -->
+<!-- 学习模式选择中心 - 基于 PRD 6.6.2 设计规范 -->
+
+<view class="container learning-container">
+  
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="header-title">学习模式</view>
+    <view class="header-action" bindtap="onToggleSettings">
+      <text class="icon">⚙️</text>
+    </view>
+  </view>
+
+  <!-- 词库信息卡片 -->
+  <view class="wordbank-card card">
+    <view class="wordbank-header" bindtap="onChangeWordbank">
+      <view class="wordbank-info">
+        <view class="wordbank-name">{{currentWordbank.name}}</view>
+        <view class="wordbank-stats">
+          <text class="stats-item">已掌握 {{currentWordbank.masteredWords}}/{{currentWordbank.totalWords}}</text>
+        </view>
+      </view>
+      <view class="wordbank-arrow">></view>
+    </view>
+    
+    <!-- 进度条 -->
+    <view class="progress-section">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{currentWordbank.progress}}%"></view>
+      </view>
+      <view class="progress-text">{{currentWordbank.progress}}%</view>
+    </view>
+  </view>
+
+  <!-- 继续学习 CTA -->
+  <view class="continue-section" wx:if="{{lastStudy}}">
+    <view class="continue-card" bindtap="onContinueStudy">
+      <view class="continue-icon">▶️</view>
+      <view class="continue-info">
+        <view class="continue-title">继续学习</view>
+        <view class="continue-desc">上次: {{lastStudy.mode === 'card' ? '卡片学习' : '其他模式'}} | 进度 {{lastStudy.wordIndex}}</view>
+      </view>
+      <view class="continue-btn">继续</view>
+    </view>
+  </view>
+
+  <!-- 学习模式选择 -->
+  <view class="modes-section">
+    <view class="section-title">选择学习模式</view>
+    
+    <view class="modes-grid">
+      <view 
+        class="mode-card {{item.isVip ? 'mode-vip' : ''}}"
+        wx:for="{{learningModes}}"
+        wx:key="id"
+        data-mode="{{item.id}}"
+        bindtap="onSelectMode"
+        style="border-color: {{item.color}}"
+      >
+        <!-- VIP标签 -->
+        <view class="vip-badge" wx:if="{{item.isVip}}">👑 VIP</view>
+        
+        <!-- 新功能标签 -->
+        <view class="new-badge" wx:if="{{item.isNew}}">NEW</view>
+        
+        <view class="mode-icon" style="background-color: {{item.color}}20; color: {{item.color}}">
+          {{item.icon}}
+        </view>
+        
+        <view class="mode-name">{{item.name}}</view>
+        
+        <view class="mode-desc">{{item.desc}}</view>
+        
+        <!-- 掌握率 -->
+        <view class="mode-mastery">
+          <view class="mastery-bar">
+            <view class="mastery-fill" style="width: {{item.masteryRate}}%; background-color: {{item.color}}"></view>
+          </view>
+          <view class="mastery-text">{{item.masteryRate}}%</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习设置面板（折叠） -->
+  <view class="settings-panel {{showSettings ? 'settings-show' : ''}}">
+    <view class="settings-header" bindtap="onToggleSettings">
+      <view class="settings-title">学习设置</view>
+      <view class="settings-toggle">{{showSettings ? '收起' : '展开'}} ▼</view>
+    </view>
+    
+    <view class="settings-content" wx:if="{{showSettings}}">
+      <!-- 每日学习数量 -->
+      <view class="setting-item">
+        <view class="setting-label">每日学习数量</view>
+        <view class="setting-control">
+          <slider 
+            min="10" 
+            max="50" 
+            step="5" 
+            value="{{settings.dailyCount}}"
+            show-value
+            bindchange="onChangeDailyCount"
+          />
+        </view>
+      </view>
+      
+      <!-- 自动播放发音 -->
+      <view class="setting-item">
+        <view class="setting-label">自动播放发音</view>
+        <view class="setting-control">
+          <switch 
+            checked="{{settings.autoPlay}}"
+            bindchange="onToggleAutoPlay"
+          />
+        </view>
+      </view>
+      
+      <!-- 发音语速 -->
+      <view class="setting-item">
+        <view class="setting-label">发音语速</view>
+        <view class="setting-control">
+          <picker mode="selector" range="{{['慢速', '正常', '快速']}}" bindchange="onChangeSpeechRate">
+            <view class="picker-value">
+              {{settings.speechRate === 'slow' ? '慢速' : settings.speechRate === 'fast' ? '快速' : '正常'}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="safe-area-bottom"></view>
+
+</view>

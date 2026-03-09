@@ -72,19 +72,31 @@ Page({
     });
   },
 
+  // 查看学习报告
+  onViewReport() {
+    wx.navigateTo({
+      url: '/pages/parent-report/parent-report'
+    });
+  },
+
   // 查看词库
   onViewWords() {
-    wx.showToast({
-      title: '功能开发中...',
-      icon: 'none'
+    wx.switchTab({
+      url: '/pages/library/library'
     });
   },
 
   // 查看错题本
   onViewWrongWords() {
-    wx.showToast({
-      title: '功能开发中...',
-      icon: 'none'
+    wx.navigateTo({
+      url: '/pages/wrong-words/wrong-words'
+    });
+  },
+
+  // 打开VIP页面
+  onOpenVip() {
+    wx.navigateTo({
+      url: '/pages/vip/vip'
     });
   }
 });

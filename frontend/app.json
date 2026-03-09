@@ -1,23 +1,25 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/learning/learning",
     "pages/study/study",
     "pages/checkin/checkin",
     "pages/profile/profile",
+    "pages/library/library",
     "pages/vip/vip",
     "pages/parent-report/parent-report",
     "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#4CAF50",
+    "navigationBarBackgroundColor": "#6D28D9",
     "navigationBarTitleText": "单词热",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#f5f5f5"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#4CAF50",
+    "color": "#65728c",
+    "selectedColor": "#6D28D9",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [
@@ -28,10 +30,16 @@
         "selectedIconPath": "assets/icons/home-active.png"
       },
       {
-        "pagePath": "pages/checkin/checkin",
-        "text": "打卡",
-        "iconPath": "assets/icons/checkin.png",
-        "selectedIconPath": "assets/icons/checkin-active.png"
+        "pagePath": "pages/learning/learning",
+        "text": "学习",
+        "iconPath": "assets/icons/learn.png",
+        "selectedIconPath": "assets/icons/learn-active.png"
+      },
+      {
+        "pagePath": "pages/library/library",
+        "text": "词库",
+        "iconPath": "assets/icons/library.png",
+        "selectedIconPath": "assets/icons/library-active.png"
       },
       {
         "pagePath": "pages/profile/profile",

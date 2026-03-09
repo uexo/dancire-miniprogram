@@ -1,0 +1,96 @@
+version: '3.8'
+
+# 单词热 - 本地开发 Docker Compose 配置
+# 使用方法:
+#   docker-compose up -d    # 启动所有服务
+#   docker-compose down     # 停止所有服务
+#   docker-compose logs -f  # 查看日志
+
+services:
+  # Node.js 后端服务
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: wordheat-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_TYPE=sqlite
+      - SQLITE_PATH=/app/data/wordheat.db
+      - JWT_SECRET=dev-jwt-secret-key
+      - WX_APPID=${WX_APPID:-wx-test-appid}
+      - WX_SECRET=${WX_SECRET:-wx-test-secret}
+    volumes:
+      - ./backend:/app
+      - app-data:/app/data
+      - app-logs:/app/logs
+      - app-cache:/app/cache
+    command: npm run dev
+    networks:
+      - wordheat-network
+
+  # MySQL 数据库（可选，用于测试MySQL模式）
+  # 取消注释以下部分启用MySQL
+  # db:
+  #   image: mysql:8.0
+  #   container_name: wordheat-db
+  #   restart: unless-stopped
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=rootpassword
+  #     - MYSQL_DATABASE=wordheat
+  #     - MYSQL_USER=wordheat
+  #     - MYSQL_PASSWORD=wordheat123
+  #   volumes:
+  #     - mysql-data:/var/lib/mysql
+  #     - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+  #     - ./database/mock_data.sql:/docker-entrypoint-initdb.d/02-mock_data.sql
+  #   ports:
+  #     - "3306:3306"
+  #   networks:
+  #     - wordheat-network
+
+  # Redis 缓存（可选）
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: wordheat-redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
+  #   networks:
+  #     - wordheat-network
+
+  # Adminer - 数据库管理工具（开发用）
+  adminer:
+    image: adminer:latest
+    container_name: wordheat-adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+    networks:
+      - wordheat-network
+    profiles:
+      - tools
+
+volumes:
+  app-data:
+    driver: local
+  app-logs:
+    driver: local
+  app-cache:
+    driver: local
+  # mysql-data:
+  #   driver: local
+  # redis-data:
+  #   driver: local
+
+networks:
+  wordheat-network:
+    driver: bridge

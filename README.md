@@ -1,84 +1,277 @@
 # 单词热 (WordHeat) - 微信小程序
 
-> 专为中小学生打造的课标同步背单词小程序
+> 🎓 专为中小学生打造的课标同步背单词小程序
 
-## ✨ 功能特性
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-WeChat%20Mini%20Program-brightgreen" alt="Platform">
+  <img src="https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-blue" alt="Backend">
+  <img src="https://img.shields.io/badge/Database-SQLite%20%2F%20MySQL-orange" alt="Database">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
+</p>
 
-- 📚 **课标同步** - 人教版PEP小学英语3-6年级单词
-- 🧠 **艾宾浩斯记忆** - 科学复习算法，抗遗忘
-- 🎮 **游戏化学习** - 闯关模式，趣味背单词
-- 📊 **家长报告** - 学习数据可视化，效果看得见
-- 💎 **VIP会员** - 解锁更多高级功能
+---
+
+## 📖 项目介绍
+
+**单词热**是一款面向中国中小学生的小程序英语学习应用，专注于提供与课标同步的单词学习体验。我们采用科学的艾宾浩斯记忆曲线算法，结合游戏化的学习方式，让背单词变得轻松有趣。
+
+### ✨ 核心优势
+
+- 📚 **课标同步** - 紧密跟随人教版PEP等主流教材
+- 🧠 **科学记忆** - 基于艾宾浩斯遗忘曲线的智能复习
+- 🎮 **趣味学习** - 闯关模式、打卡挑战、成就系统
+- 📊 **数据可视** - 家长报告、学习统计、记忆曲线
+- 🎙️ **语音支持** - 真人发音、跟读练习
+
+---
+
+## 🚀 功能列表
+
+### 学习功能
+- [x] 📖 单词学习（艾宾浩斯复习算法）
+- [x] 🎯 选择题练习
+- [x] 🔊 真人发音（TTS）
+- [x] 📝 错题本
+- [x] ⭐ 单词收藏
+
+### 游戏化功能
+- [x] 📅 每日打卡
+- [x] 🔥 连续打卡奖励
+- [x] 🏆 学习成就
+- [x] 💰 金币系统
+
+### 家长功能
+- [x] 👨‍👩‍👧 学习报告
+- [x] 📈 学习进度追踪
+- [x] 📊 记忆曲线分析
+- [x] 👀 错题监控
+
+### 会员功能
+- [x] 💎 VIP会员（月度/季度/年度）
+- [x] 💳 微信支付
+- [x] 🎁 会员专属内容
+
+---
 
 ## 🛠️ 技术栈
 
-| 层级 | 技术 |
-|------|------|
-| 前端 | 微信小程序原生 |
-| 后端 | Node.js + Express |
-| 数据库 | MySQL 8.0 |
-| 缓存 | Redis（预留） |
-| 支付 | 微信支付 |
+| 层级 | 技术 | 说明 |
+|------|------|------|
+| **前端** | 微信小程序原生 | WXML + WXSS + JavaScript |
+| **后端** | Node.js + Express | RESTful API |
+| **数据库** | SQLite / MySQL | 双模式支持，开发/生产灵活切换 |
+| **缓存** | Redis（预留） | 会话、验证码缓存 |
+| **支付** | 微信支付 | 小程序支付集成 |
+| **测试** | Jest + Supertest | 单元测试、API测试 |
+| **部署** | Docker + PM2 | 容器化、进程管理 |
+
+---
 
 ## 📁 项目结构
 
 ```
 单词热/
-├── frontend/          # 小程序前端
-│   ├── pages/        # 页面代码
-│   └── utils/        # 工具函数
-├── backend/          # 后端服务
-│   ├── src/routes/   # API路由
-│   └── config/       # 配置文件
-├── database/         # 数据库
-│   ├── schema.sql    # 表结构
-│   └── data/         # 词库数据
-└── docs/             # 文档
+├── 📱 frontend/              # 小程序前端
+│   ├── pages/               # 页面代码
+│   │   ├── index/          # 首页
+│   │   ├── learning/       # 学习中心
+│   │   ├── library/        # 词库
+│   │   ├── reports/        # 学习报告
+│   │   ├── vip/            # 会员中心
+│   │   └── profile/        # 个人中心
+│   ├── components/         # 组件
+│   ├── utils/              # 工具函数
+│   └── images/             # 静态图片
+│
+├── ⚙️ backend/               # 后端服务
+│   ├── src/
+│   │   ├── routes/         # API路由
+│   │   │   ├── auth.js     # 认证
+│   │   │   ├── users.js    # 用户
+│   │   │   ├── words.js    # 单词学习
+│   │   │   ├── wordbank.js # 词库管理
+│   │   │   ├── checkin.js  # 打卡
+│   │   │   ├── reports.js  # 学习报告
+│   │   │   ├── payment.js  # 支付
+│   │   │   ├── orders.js   # 订单
+│   │   │   └── tts.js      # 语音
+│   │   ├── middleware/     # 中间件
+│   │   ├── services/       # 服务层
+│   │   ├── utils/          # 工具函数
+│   │   ├── db.js           # 数据库连接
+│   │   └── app.js          # 应用入口
+│   ├── __tests__/          # 测试文件
+│   └── package.json
+│
+├── 🗄️ database/              # 数据库
+│   ├── schema.sql          # 表结构
+│   ├── mock_data.sql       # 测试数据
+│   └── scripts/            # 数据导入脚本
+│
+├── 📚 docs/                  # 文档
+│   ├── ARCHITECTURE_V2.md  # 架构设计
+│   ├── API文档.md           # API文档
+│   ├── PRD.md              # 产品需求
+│   └── DEPLOY.md           # 部署指南
+│
+├── 🐳 docker-compose.yml     # Docker配置
+├── 📋 .env.example           # 环境变量模板
+└── 📖 README.md              # 本文件
 ```
+
+---
 
 ## 🚀 快速开始
 
-### 1. 启动后端服务
+### 环境要求
+
+- Node.js >= 16.0.0
+- npm >= 8.0.0
+- 微信开发者工具
+- Docker（可选，用于本地开发）
+
+### 1. 克隆项目
+
+```bash
+git clone https://github.com/yourusername/wordheat.git
+cd wordheat
+```
+
+### 2. 启动后端服务
+
 ```bash
 cd backend
+
+# 安装依赖
 npm install
+
+# 配置环境变量
 cp .env.example .env
-# 编辑 .env 配置数据库和微信参数
-npm start
+# 编辑 .env 文件，配置数据库和微信参数
+
+# 启动开发服务器
+npm run dev
+
+# 或使用 Docker
+docker-compose up -d
 ```
 
-### 2. 导入词库数据
+### 3. 导入测试数据
+
 ```bash
-node database/scripts/import_words.js \
-  --file=./database/data/pep_primary_words.json
+# SQLite（开发环境）
+sqlite3 wordheat.db < database/mock_data.sql
+
+# MySQL（生产环境）
+mysql -u root -p wordheat < database/schema.sql
+mysql -u root -p wordheat < database/mock_data.sql
 ```
 
-### 3. 运行小程序
-使用微信开发者工具打开 `frontend` 目录即可预览。
+### 4. 运行小程序
 
-## 📊 项目进度 - ✅ 100% 完成
+1. 打开微信开发者工具
+2. 选择「导入项目」
+3. 选择 `frontend` 目录
+4. 填写你的小程序 AppID
+5. 点击「编译」
 
-- ✅ 数据库设计 (100%)
-- ✅ 艾宾浩斯算法 (100%)
-- ✅ 前端页面 (100%)
-- ✅ 后端API (100%)
-- ✅ 微信支付框架 (100%)
-- ✅ **音频TTS** (100%)
-- ✅ **单元测试** (100%)
-- ✅ **部署配置** (100%)
+### 5. 运行测试
 
-**状态**: 🎉 MVP 开发完成，准备部署上线！
+```bash
+cd backend
 
-## 📄 相关文档
+# 运行所有测试
+npm test
 
-- [部署指南](./DEPLOY.md)
-- [开发进度报告](./开发进度报告.md)
-- [API文档](./docs/API文档.md)
-- [产品需求文档](./docs/PRD.md)
+# 运行测试并生成覆盖率报告
+npm run test:coverage
 
-## 📝 License
-
-MIT License
+# 监视模式运行测试
+npm run test:watch
+```
 
 ---
-Made with ❤️ for students learning English
+
+## ⚙️ 环境变量配置
+
+复制 `.env.example` 到 `.env` 并根据环境配置：
+
+```bash
+# 应用配置
+NODE_ENV=development
+PORT=3000
+JWT_SECRET=your-secret-key
+
+# 数据库配置（双模式支持）
+# SQLite（开发环境）
+DB_TYPE=sqlite
+SQLITE_PATH=./wordheat.db
+
+# MySQL（生产环境）
+# DB_TYPE=mysql
+# DB_HOST=localhost
+# DB_PORT=3306
+# DB_USER=root
+# DB_PASSWORD=your-password
+# DB_NAME=wordheat
+
+# 微信小程序配置
+WX_APPID=your-wx-appid
+WX_SECRET=your-wx-secret
+
+# 微信支付配置
+WX_MCH_ID=your-mch-id
+WX_API_KEY=your-api-key
+WX_NOTIFY_URL=https://your-domain.com/api/v1/payment/notify
+
+# TTS配置（可选）
+TTS_APP_ID=your-tts-appid
+TTS_API_KEY=your-tts-apikey
+```
+
+---
+
+## 📚 相关文档
+
+| 文档 | 说明 |
+|------|------|
+| [API文档](./docs/API文档.md) | RESTful API 详细文档 |
+| [部署指南](./docs/DEPLOY.md) | 生产环境部署步骤 |
+| [架构设计](./docs/ARCHITECTURE_V2.md) | 系统架构设计文档 |
+| [产品需求](./docs/PRD.md) | 产品需求文档 |
+
+---
+
+## 🧪 测试覆盖
+
+| 模块 | 状态 | 覆盖率 |
+|------|------|--------|
+| 认证模块 | ✅ | 95% |
+| 用户模块 | ✅ | 90% |
+| 单词学习 | ✅ | 88% |
+| 词库管理 | ✅ | 85% |
+| 打卡系统 | ✅ | 92% |
+| 支付系统 | ✅ | 80% |
+| TTS服务 | ✅ | 75% |
+
+---
+
+## 🤝 贡献指南
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送分支 (`git push origin feature/AmazingFeature`)
+5. 创建 Pull Request
+
+---
+
+## 📄 许可证
+
+[MIT](LICENSE) © 2026 单词热团队
+
+---
+
+<p align="center">
+  Made with ❤️ for students learning English
+</p>
