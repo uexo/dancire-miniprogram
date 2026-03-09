@@ -7,11 +7,11 @@ version: '3.8'
 #   docker-compose logs -f  # 查看日志
 
 services:
-  # Node.js 后端服务
+  # NestJS 后端服务
   app:
     build:
-      context: .
-      dockerfile: Dockerfile.dev
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: wordheat-app
     restart: unless-stopped
     ports:
@@ -19,17 +19,16 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - DB_TYPE=sqlite
-      - SQLITE_PATH=/app/data/wordheat.db
+      - DATABASE_URL=file:/app/data/wordheat.db
       - JWT_SECRET=dev-jwt-secret-key
       - WX_APPID=${WX_APPID:-wx-test-appid}
       - WX_SECRET=${WX_SECRET:-wx-test-secret}
     volumes:
       - ./backend:/app
+      - /app/node_modules
       - app-data:/app/data
       - app-logs:/app/logs
-      - app-cache:/app/cache
-    command: npm run dev
+    command: npm run start:dev
     networks:
       - wordheat-network
 

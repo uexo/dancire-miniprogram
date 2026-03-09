@@ -1,0 +1,193 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户表
+model User {
+  id            Int      @id @default(autoincrement())
+  openid        String   @unique @db.VarChar(100)
+  phone         String?  @db.VarChar(20)
+  nickname      String   @default("") @db.VarChar(100)
+  avatarUrl     String   @default("") @map("avatar_url") @db.VarChar(500)
+  grade         Int      @default(3)
+  textbookVersion String  @default("pep") @map("textbook_version") @db.VarChar(20)
+  isVip         Boolean  @default(false) @map("is_vip")
+  vipExpireAt   DateTime? @map("vip_expire_at")
+  status        String   @default("active") @db.VarChar(20)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  lastLoginAt   DateTime? @map("last_login_at")
+  lastActiveAt  DateTime? @map("last_active_at")
+
+  // 关联
+  learningRecords LearningRecord[]
+  wrongWords      WrongWord[]
+  checkinRecords  CheckinRecord[]
+  orders          Order[]
+  userStatistics  UserStatistic?
+
+  @@map("users")
+}
+
+// 单词库
+model WordBank {
+  id                 Int      @id @default(autoincrement())
+  word               String   @db.VarChar(100)
+  phonetic           String   @default("") @db.VarChar(100)
+  meaning            String   @db.Text
+  pos                String   @default("") @db.VarChar(50) // part of speech
+  example            String   @default("") @db.Text
+  exampleTranslation String   @default("") @map("example_translation") @db.Text
+  audioUrl           String   @default("") @map("audio_url") @db.VarChar(500)
+  difficulty         Int      @default(1)
+  grade              Int      @default(1)
+  unit               Int      @default(1)
+  tags               String   @default("[]") @db.Text // JSON string
+  version            Int      @default(1)
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  learningRecords    LearningRecord[]
+  wrongWords         WrongWord[]
+
+  @@index([grade, unit])
+  @@index([word])
+  @@map("word_banks")
+}
+
+// 词库版本
+model WordVersion {
+  id          Int      @id @default(autoincrement())
+  version     String   @db.VarChar(20)
+  description String   @default("") @db.Text
+  totalWords  Int      @default(0) @map("total_words")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("word_versions")
+}
+
+// 学习记录
+model LearningRecord {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @map("user_id")
+  wordId        Int      @map("word_id")
+  status        String   @default("new") @db.VarChar(20) // new, learning, mastered
+  familiarity   Int      @default(0) // 0-100
+  correctCount  Int      @default(0) @map("correct_count")
+  wrongCount    Int      @default(0) @map("wrong_count")
+  reviewCount   Int      @default(0) @map("review_count")
+  nextReviewAt  DateTime @default(now()) @map("next_review_at")
+  lastStudiedAt DateTime? @map("last_studied_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word          WordBank @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+  @@index([userId, nextReviewAt])
+  @@map("learning_records")
+}
+
+// 错题本
+model WrongWord {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @map("user_id")
+  wordId       Int      @map("word_id")
+  wrongCount   Int      @default(1) @map("wrong_count")
+  lastWrongAt  DateTime @default(now()) @map("last_wrong_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // 关联
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word         WordBank @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+  @@index([userId])
+  @@map("wrong_words")
+}
+
+// 打卡记录
+model CheckinRecord {
+  id               Int      @id @default(autoincrement())
+  userId           Int      @map("user_id")
+  checkinDate      DateTime @map("checkin_date") @db.Date
+  continuousDays   Int      @default(1) @map("continuous_days")
+  studiedWords     Int      @default(0) @map("studied_words")
+  accuracy         Int      @default(0)
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  // 关联
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, checkinDate])
+  @@index([userId, checkinDate])
+  @@map("checkin_records")
+}
+
+// 用户统计
+model UserStatistic {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique @map("user_id")
+  totalWords     Int      @default(0) @map("total_words")
+  masteredWords  Int      @default(0) @map("mastered_words")
+  learningWords  Int      @default(0) @map("learning_words")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_statistics")
+}
+
+// 订单表
+model Order {
+  id            Int       @id @default(autoincrement())
+  orderNo       String    @unique @map("order_no") @db.VarChar(50)
+  userId        Int       @map("user_id")
+  productType   String    @map("product_type") @db.VarChar(20)
+  productName   String    @map("product_name") @db.VarChar(100)
+  amount        Decimal   @db.Decimal(10, 2)
+  status        String    @default("pending") @db.VarChar(20) // pending, paid, failed
+  prepayId      String?   @map("prepay_id") @db.VarChar(100)
+  wxNonceStr    String?   @map("wx_nonce_str") @db.VarChar(50)
+  transactionId String?   @map("transaction_id") @db.VarChar(50)
+  paidAt        DateTime? @map("paid_at")
+  expireAt      DateTime? @map("expire_at")
+  errorMsg      String?   @map("error_msg") @db.Text
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  // 关联
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refunds       Refund[]
+
+  @@index([userId])
+  @@index([orderNo])
+  @@map("orders")
+}
+
+// 退款表
+model Refund {
+  id          Int      @id @default(autoincrement())
+  refundNo    String   @unique @map("refund_no") @db.VarChar(50)
+  orderNo     String   @map("order_no") @db.VarChar(50)
+  userId      Int      @map("user_id")
+  amount      Decimal  @db.Decimal(10, 2)
+  reason      String   @db.Text
+  status      String   @default("pending") @db.VarChar(20)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // 关联
+  order       Order    @relation(fields: [orderNo], references: [orderNo], onDelete: Cascade)
+
+  @@map("refunds")
+}

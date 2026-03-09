@@ -1,0 +1,50 @@
+# 生产环境 Dockerfile (NestJS)
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# 安装依赖工具
+RUN apk add --no-cache python3 make g++
+
+# 复制 package.json
+COPY package*.json ./
+COPY prisma ./prisma/
+
+# 安装依赖
+RUN npm install
+
+# 复制源代码
+COPY . .
+
+# 生成 Prisma Client
+RUN npx prisma generate
+
+# 构建应用
+RUN npm run build
+
+# 生产镜像
+FROM node:18-alpine
+
+WORKDIR /app
+
+# 安装生产环境依赖
+RUN apk add --no-cache python3 make g++
+
+# 复制 package.json
+COPY package*.json ./
+COPY prisma ./prisma/
+
+# 安装生产依赖
+RUN npm install --production
+
+# 生成 Prisma Client
+RUN npx prisma generate
+
+# 复制构建产物
+COPY --from=builder /app/dist ./dist
+
+# 暴露端口
+EXPOSE 3000
+
+# 启动命令
+CMD ["npm", "run", "start:prod"]

@@ -58,11 +58,11 @@
 | 层级 | 技术 | 说明 |
 |------|------|------|
 | **前端** | 微信小程序原生 | WXML + WXSS + JavaScript |
-| **后端** | Node.js + Express | RESTful API |
-| **数据库** | SQLite / MySQL | 双模式支持，开发/生产灵活切换 |
+| **后端** | NestJS + TypeScript | 模块化、TypeSafe RESTful API |
+| **数据库** | SQLite / MySQL | Prisma ORM，开发/生产灵活切换 |
 | **缓存** | Redis（预留） | 会话、验证码缓存 |
 | **支付** | 微信支付 | 小程序支付集成 |
-| **测试** | Jest + Supertest | 单元测试、API测试 |
+| **测试** | Jest + Supertest | 单元测试、E2E测试 |
 | **部署** | Docker + PM2 | 容器化、进程管理 |
 
 ---
@@ -73,34 +73,26 @@
 单词热/
 ├── 📱 frontend/              # 小程序前端
 │   ├── pages/               # 页面代码
-│   │   ├── index/          # 首页
-│   │   ├── learning/       # 学习中心
-│   │   ├── library/        # 词库
-│   │   ├── reports/        # 学习报告
-│   │   ├── vip/            # 会员中心
-│   │   └── profile/        # 个人中心
 │   ├── components/         # 组件
 │   ├── utils/              # 工具函数
 │   └── images/             # 静态图片
 │
-├── ⚙️ backend/               # 后端服务
+├── ⚙️ backend/               # NestJS 后端
 │   ├── src/
-│   │   ├── routes/         # API路由
-│   │   │   ├── auth.js     # 认证
-│   │   │   ├── users.js    # 用户
-│   │   │   ├── words.js    # 单词学习
-│   │   │   ├── wordbank.js # 词库管理
-│   │   │   ├── checkin.js  # 打卡
-│   │   │   ├── reports.js  # 学习报告
-│   │   │   ├── payment.js  # 支付
-│   │   │   ├── orders.js   # 订单
-│   │   │   └── tts.js      # 语音
-│   │   ├── middleware/     # 中间件
-│   │   ├── services/       # 服务层
-│   │   ├── utils/          # 工具函数
-│   │   ├── db.js           # 数据库连接
-│   │   └── app.js          # 应用入口
-│   ├── __tests__/          # 测试文件
+│   │   ├── main.ts         # 应用入口
+│   │   ├── app.module.ts   # 根模块
+│   │   ├── common/         # 公共模块（Guards、Filters）
+│   │   └── modules/        # 业务模块
+│   │       ├── auth/       # 认证
+│   │       ├── users/      # 用户
+│   │       ├── words/      # 单词学习
+│   │       ├── wordbank/   # 词库管理
+│   │       ├── checkin/    # 打卡
+│   │       ├── reports/    # 学习报告
+│   │       ├── payment/    # 支付
+│   │       └── tts/        # 语音
+│   ├── test/               # E2E测试
+│   ├── prisma/             # 数据库Schema
 │   └── package.json
 │
 ├── 🗄️ database/              # 数据库
@@ -108,14 +100,7 @@
 │   ├── mock_data.sql       # 测试数据
 │   └── scripts/            # 数据导入脚本
 │
-├── 📚 docs/                  # 文档
-│   ├── ARCHITECTURE_V2.md  # 架构设计
-│   ├── API文档.md           # API文档
-│   ├── PRD.md              # 产品需求
-│   └── DEPLOY.md           # 部署指南
-│
 ├── 🐳 docker-compose.yml     # Docker配置
-├── 📋 .env.example           # 环境变量模板
 └── 📖 README.md              # 本文件
 ```
 
@@ -137,7 +122,7 @@ git clone https://github.com/yourusername/wordheat.git
 cd wordheat
 ```
 
-### 2. 启动后端服务
+### 2. 启动后端服务 (NestJS)
 
 ```bash
 cd backend
@@ -150,11 +135,17 @@ cp .env.example .env
 # 编辑 .env 文件，配置数据库和微信参数
 
 # 启动开发服务器
-npm run dev
+npm run start:dev
 
 # 或使用 Docker
+cd ..
 docker-compose up -d
 ```
+
+**NestJS 特性：**
+- 📝 TypeScript 类型安全
+- 📚 访问 Swagger 文档: http://localhost:3000/api/docs
+- 🧪 E2E 测试: `npm run test:e2e`
 
 ### 3. 导入测试数据
 
